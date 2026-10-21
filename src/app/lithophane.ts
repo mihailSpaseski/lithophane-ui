@@ -78,7 +78,8 @@ export function prepare(img: HTMLImageElement, p: Params): Prep {
   return { rows, cols, th, col, stripes, height };
 }
 
-export interface Mesh { V: Float32Array; F: Uint32Array; C: Float32Array; outerR: number; radius: number; height: number }
+export interface Box { x0: number; x1: number; y0: number; y1: number; z1: number }
+export interface Mesh { V: Float32Array; F: Uint32Array; C: Float32Array; outerR: number; radius: number; height: number; box: Box }
 
 interface Ring { rIn: number; rOut: number; a0: number; span: number; full: boolean; m: number; pts: number }
 
@@ -155,7 +156,13 @@ export function buildMesh(p: Params, d: Prep): Mesh {
       tri(IB + e, OT + e, OB + e); tri(IB + e, IT + e, OT + e);
     }
   });
-  return { V, F, C, outerR: Ro, radius: R, height: d.height };
+  const box: Box = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity, z1: 0 };
+  for (let i = 0; i < V.length; i += 3) {
+    if (V[i] < box.x0) box.x0 = V[i]; if (V[i] > box.x1) box.x1 = V[i];
+    if (V[i + 1] < box.y0) box.y0 = V[i + 1]; if (V[i + 1] > box.y1) box.y1 = V[i + 1];
+    if (V[i + 2] > box.z1) box.z1 = V[i + 2];
+  }
+  return { V, F, C, outerR: Ro, radius: R, height: d.height, box };
 }
 
 export function toStl(m: Mesh): Blob {

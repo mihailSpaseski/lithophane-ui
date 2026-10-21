@@ -1,84 +1,125 @@
 <aside class="w-80 shrink-0 space-y-6 overflow-y-auto border-r border-white/10 bg-zinc-900 p-5">
-  <header class="flex items-center gap-3">
-    <div class="grid h-10 w-10 place-items-center rounded-xl bg-amber-400 text-xl shadow-lg shadow-amber-400/20">💡</div>
-    <div>
-      <h1 class="text-base font-semibold leading-tight">Lithophane Lamp</h1>
-      <p class="text-xs text-zinc-500">Picture, curve, base, STL</p>
-    </div>
-  </header>
+    <header class="flex items-center gap-3">
+        <div class="grid h-10 w-10 place-items-center rounded-xl bg-amber-400 text-xl shadow-lg shadow-amber-400/20">💡
+        </div>
+        <div>
+            <h1 class="text-base font-semibold leading-tight">Lithophane Lamp</h1>
+            <p class="text-xs text-zinc-500">Picture, curve, base, STL</p>
+        </div>
+    </header>
 
-  <label class="flex cursor-pointer flex-col items-center gap-1 rounded-xl border border-dashed border-white/20 py-5 text-sm text-zinc-300 transition hover:border-amber-400 hover:bg-white/5">
-    <span class="font-medium">{{ img() ? 'Change picture' : 'Choose a picture' }}</span>
-    <span class="text-xs text-zinc-500">or drop it on the preview</span>
-    <input type="file" accept="image/*" hidden (change)="pick($event)">
-  </label>
+    <label
+        class="flex cursor-pointer flex-col items-center gap-1 rounded-xl border border-dashed border-white/20 py-5 text-sm text-zinc-300 transition hover:border-amber-400 hover:bg-white/5">
+        <span class="font-medium">{{ img() ? 'Change picture' : 'Choose a picture' }}</span>
+        <span class="text-xs text-zinc-500">or drop it on the preview</span>
+        <input type="file" accept="image/*" hidden (change)="pick($event)">
+    </label>
 
-  <section class="space-y-2">
-    <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Color mode</h2>
-    <div class="grid grid-cols-2 rounded-xl bg-zinc-800 p-1">
-      <button (click)="set('mode','single')" [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().mode==='single' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">Single color</button>
-      <button (click)="set('mode','rgb')" [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().mode==='rgb' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">RGB swaps</button>
-    </div>
-    <p class="text-xs text-zinc-500">{{ p().mode==='rgb' ? 'Prints in red, green and blue bands. You also get a swap sheet.' : 'One filament, thickness makes the picture.' }}</p>
-  </section>
+    <section class="space-y-2">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Color mode</h2>
+        <div class="grid grid-cols-2 rounded-xl bg-zinc-800 p-1">
+            <button (click)="set('mode','single')"
+                [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().mode==='single' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">Single
+                color</button>
+            <button (click)="set('mode','rgb')"
+                [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().mode==='rgb' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">RGB
+                swaps</button>
+        </div>
+        <p class="text-xs text-zinc-500">{{ p().mode==='rgb' ? 'Prints in red, green and blue bands. You also get a swap
+            sheet.' : 'One filament, thickness makes the picture.' }}</p>
+    </section>
 
-  <section class="space-y-2">
-  <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Base shape</h2>
-  <div class="grid grid-cols-2 rounded-xl bg-zinc-800 p-1">
-    <button (click)="set('baseShape','semi')" [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().baseShape==='semi' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">Semicircle</button>
-    <button (click)="set('baseShape','full')" [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().baseShape==='full' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">Full circle</button>
-  </div>
-  @if (p().baseShape==='semi') {
-    <p class="text-xs text-zinc-500">Half-round base under the picture, with a ring kept around the hole. It widens if the arc is over 180°.</p>
-  }
-</section>
+    <section class="space-y-2">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Base shape</h2>
+        <div class="grid grid-cols-2 rounded-xl bg-zinc-800 p-1">
+            <button (click)="set('baseShape','semi')"
+                [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().baseShape==='semi' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">Semicircle</button>
+            <button (click)="set('baseShape','full')"
+                [class]="'rounded-lg py-2 text-sm font-medium transition ' + (p().baseShape==='full' ? 'bg-amber-400 text-zinc-900 shadow' : 'text-zinc-400 hover:text-white')">Full
+                circle</button>
+        </div>
+        @if (p().baseShape==='semi') {
+        <p class="text-xs text-zinc-500">Half-round base under the picture, with a ring kept around the hole. It widens
+            if the arc is over 180°.</p>
+        }
+    </section>
 
-@for (g of groups; track g) {
-      <section class="space-y-3">
+    <section class="space-y-2">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Printer bed</h2>
+        <div class="grid grid-cols-3 gap-1.5">
+            @for (pr of printers; track pr.id) {
+            <button (click)="choose(pr.id)"
+                [class]="'rounded-lg px-2 py-2 text-xs font-medium transition ' + (printer()===pr.id ? 'bg-amber-400 text-zinc-900' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700')">{{pr.name}}</button>
+            }
+        </div>
+        @if (fitInfo(); as f) {
+        <div
+            [class]="'rounded-xl border p-3 text-xs ' + (f.ok ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-200' : 'border-red-400/40 bg-red-400/10 text-red-200')">
+            <div class="font-semibold">{{ f.ok ? 'Fits on the ' + f.pr.name : 'Too big for the ' + f.pr.name }}</div>
+            <div class="font-mono">{{dims()!.x.toFixed(0)}} × {{dims()!.y.toFixed(0)}} × {{dims()!.z.toFixed(0)}} mm of
+                {{f.pr.x}} × {{f.pr.y}} × {{f.pr.z}}</div>
+            @if (!f.ok) { <div class="mt-1">Too large in: {{f.over.join(', ')}}</div> }
+        </div>
+        } @else {
+        <p class="text-xs text-zinc-500">Tap a printer to show its bed and build volume. Tap it again to hide it.</p>
+        }
+    </section>
+
+    @for (g of groups; track g) {
+    <section class="space-y-3">
         <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500">{{g}}</h2>
         @for (s of sliders; track s.k) {
-          @if (s.g === g && (!s.rgb || p().mode==='rgb')) {
-            <label class="block">
-              <span class="flex justify-between text-xs text-zinc-400">{{s.label}}<b class="font-mono text-zinc-100">{{p()[s.k]}}</b></span>
-              <input class="mt-1 w-full accent-amber-400" type="range" [min]="s.min" [max]="s.max" [step]="s.step" [value]="p()[s.k]" (input)="set(s.k, $any($event.target).valueAsNumber)">
-            </label>
-          }
+        @if (s.g === g && (!s.rgb || p().mode==='rgb')) {
+        <label class="block">
+            <span class="flex justify-between text-xs text-zinc-400">{{s.label}}<b
+                    class="font-mono text-zinc-100">{{p()[s.k]}}</b></span>
+            <input class="mt-1 w-full accent-amber-400" type="range" [min]="s.min" [max]="s.max" [step]="s.step"
+                [value]="p()[s.k]" (input)="set(s.k, $any($event.target).valueAsNumber)">
+        </label>
+        }
         }
         @if (g === 'Thickness') {
-          <label class="flex items-center gap-2 text-sm text-zinc-300">
-            <input type="checkbox" class="size-4 accent-amber-400" [checked]="p().invert" (change)="set('invert', $any($event.target).checked)"> Invert (negative)
-          </label>
+        <label class="flex items-center gap-2 text-sm text-zinc-300">
+            <input type="checkbox" class="size-4 accent-amber-400" [checked]="p().invert"
+                (change)="set('invert', $any($event.target).checked)"> Invert (negative)
+        </label>
         }
-      </section>
-  }
+    </section>
+    }
 
-  <div [class]="'rounded-xl border p-3 text-sm ' + (inner() < 66 ? 'border-orange-400/40 bg-orange-400/10 text-orange-200' : 'border-white/10 bg-zinc-800 text-zinc-300')">
-    Inside diameter <b class="font-mono">{{inner().toFixed(0)}} mm</b>
-    @if (inner() < 66) { <div class="mt-1 text-xs">A 60 mm bulb will not fit.</div> }
-  </div>
-  @if (err()) { <div class="rounded-xl border border-red-400/40 bg-red-400/10 p-3 text-xs text-red-200">{{err()}}</div> }
+    <div
+        [class]="'rounded-xl border p-3 text-sm ' + (inner() < 66 ? 'border-orange-400/40 bg-orange-400/10 text-orange-200' : 'border-white/10 bg-zinc-800 text-zinc-300')">
+        Inside diameter <b class="font-mono">{{inner().toFixed(0)}} mm</b>
+        @if (inner() < 66) { <div class="mt-1 text-xs">A 60 mm bulb will not fit.</div> }
+    </div>
+    @if (err()) { <div class="rounded-xl border border-red-400/40 bg-red-400/10 p-3 text-xs text-red-200">{{err()}}
+    </div> }
 
-  <button class="w-full rounded-xl bg-emerald-500 py-3 font-semibold text-zinc-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
-    [disabled]="!img() || busy()" (click)="download()">{{ busy() ? 'Working…' : 'Download STL' }}</button>
+    <button
+        class="w-full rounded-xl bg-emerald-500 py-3 font-semibold text-zinc-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
+        [disabled]="!img() || busy()" (click)="download()">{{ busy() ? 'Working…' : 'Download STL' }}</button>
 </aside>
 
 <main #host class="relative min-w-0 flex-1 bg-gradient-to-b from-zinc-800 via-zinc-900 to-black"
-      (dragover)="$event.preventDefault()" (drop)="drop($event)">
-  <canvas #cv class="block h-full w-full"></canvas>
-  @if (!img()) {
+    (dragover)="$event.preventDefault()" (drop)="drop($event)">
+    <canvas #cv class="block h-full w-full"></canvas>
+    @if (!img()) {
     <div class="pointer-events-none absolute inset-0 grid place-items-center">
-      <div class="rounded-2xl border border-dashed border-white/20 px-10 py-8 text-center text-zinc-400">
-        <div class="text-3xl">🖼️</div>
-        <div class="mt-2 font-medium">Drop a picture here</div>
-        <div class="text-xs text-zinc-500">your lamp appears in 3D</div>
-      </div>
+        <div class="rounded-2xl border border-dashed border-white/20 px-10 py-8 text-center text-zinc-400">
+            <div class="text-3xl">🖼️</div>
+            <div class="mt-2 font-medium">Drop a picture here</div>
+            <div class="text-xs text-zinc-500">your lamp appears in 3D</div>
+        </div>
     </div>
-  } @else {
-    <div class="absolute right-4 top-4 rounded-full border border-white/10 bg-black/50 px-3 py-1 text-xs text-zinc-300 backdrop-blur">
-      {{inner().toFixed(0)}} mm inside · {{p().arc}}° arc
+    } @else {
+    <div
+        class="absolute right-4 top-4 rounded-full border border-white/10 bg-black/50 px-3 py-1 text-xs text-zinc-300 backdrop-blur">
+        {{inner().toFixed(0)}} mm inside · {{p().arc}}° arc@if (dims(); as d) { · {{d.x.toFixed(0)}} ×
+        {{d.y.toFixed(0)}} × {{d.z.toFixed(0)}} mm }
     </div>
-    <div class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-xs text-zinc-400 backdrop-blur">
-      Drag to rotate · scroll to zoom
+    <div
+        class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-xs text-zinc-400 backdrop-blur">
+        Drag to rotate · scroll to zoom
     </div>
-  }
+    }
 </main>

@@ -16,6 +16,8 @@ The curved picture stands on a base with a hole in it, so the lamp can slip over
 - **Two color modes**
   - **Single color**: one filament, the thickness makes the picture.
   - **RGB swaps**: prints in repeating red, green and blue bands, with a swap sheet (`.txt`) telling you at which layers to change filament.
+- **Rulers**: width, depth and height dimension lines around the model, with a tick every 10 mm and the size in mm.
+- **Printer presets**: tap a Bambu Lab printer (A1 mini, A1, P1P, P1S, P2S, X1 Carbon, X1E, X2D, H2S, H2D, H2C) to show its print bed with a 10 mm grid, a ruler along the edges and the build volume. The app tells you whether the lamp fits.
 - **Tone controls**: thinnest and thickest thickness, midtones (gamma), invert, and the frame around the picture.
 - **STL export**: a binary STL with adjustable detail.
 - Drag and drop a picture onto the preview.
@@ -53,7 +55,7 @@ One-time setup, after the repo is public:
 
 The workflow builds with `--base-href /lithophane-ui/`, because the site lives under the repo name. If you rename the repo, change that value in the workflow and the link at the top of this file.
 
-If the build fails with a *budget exceeded* error (three.js makes the bundle larger than Angular's default limit), raise `maximumError` for the `initial` budget in `angular.json` to `3MB`.
+If the build fails with a _budget exceeded_ error (three.js makes the bundle larger than Angular's default limit), raise `maximumError` for the `initial` budget in `angular.json` to `3MB`.
 
 ## How to use it
 
@@ -80,9 +82,9 @@ src/
   app/
     app.routes.ts
     lithophane-create/
-      lithophane-create.ts     Component: state (signals), three.js scene, export
+      lithophane-create.ts     Component: state (signals), three.js scene, rulers, bed, export
       lithophane-create.html   Tailwind UI: sidebar controls and preview
-      lithophane.ts            Engine: image to thickness map, mesh, STL, swap sheet
+    lithophane.ts              Engine: image to thickness map, mesh, STL, swap sheet
 ```
 
 ## How it works
