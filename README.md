@@ -43,20 +43,6 @@ npm i three @types/three
 
 Tailwind CSS is wired in through `src/styles.css` (`@import "tailwindcss";`).
 
-## Deploying to GitHub Pages
-
-The repo deploys itself. Every push to `main` runs `.github/workflows/deploy.yml`, which builds the app and publishes it to GitHub Pages.
-
-One-time setup, after the repo is public:
-
-1. Go to **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-3. Push to `main` (or run the workflow from the **Actions** tab). The live link above works after the first run finishes.
-
-The workflow builds with `--base-href /lithophane-ui/`, because the site lives under the repo name. If you rename the repo, change that value in the workflow and the link at the top of this file.
-
-If the build fails with a _budget exceeded_ error (three.js makes the bundle larger than Angular's default limit), raise `maximumError` for the `initial` budget in `angular.json` to `3MB`.
-
 ## How to use it
 
 1. Click **Choose a picture** (or drop one on the preview).
