@@ -97,7 +97,8 @@
 
     <button
         class="w-full rounded-xl bg-emerald-500 py-3 font-semibold text-zinc-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
-        [disabled]="!img() || busy()" (click)="download()">{{ busy() ? 'Working…' : 'Download STL' }}</button>
+        [disabled]="!img() || busy()" (click)="download()">{{ busy() ? 'Working…' : (p().mode==='rgb' ? 'Download ZIP
+        (STL + swap sheet)' : 'Download STL') }}</button>
 </aside>
 
 <main #host class="relative min-w-0 flex-1 bg-gradient-to-b from-zinc-800 via-zinc-900 to-black"
